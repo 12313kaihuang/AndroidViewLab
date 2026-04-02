@@ -17,6 +17,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.yu.hu.viewlab.navigation.ExpandableTextView
+import com.yu.hu.viewlab.navigation.ProgressButton
 import com.yu.hu.viewlab.navigation.RecordAnalysisCard
 import com.yu.hu.viewlab.ui.theme.AndroidViewLabTheme
 
@@ -40,6 +42,14 @@ fun MainScreen(
             ActionBtn(
                 text = "RecordAnalysisCard",
                 onClick = { onNavigate(RecordAnalysisCard) }
+            )
+            ActionBtn(
+                text = "ExpandableTextView",
+                onClick = { onNavigate(ExpandableTextView) }
+            )
+            ActionBtn(
+                text = "ProgressButton",
+                onClick = { onNavigate(ProgressButton) }
             )
         }
     }

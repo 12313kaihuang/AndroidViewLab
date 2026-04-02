@@ -12,3 +12,9 @@ data object Home
 
 @Serializable
 data object RecordAnalysisCard
+
+@Serializable
+data object ExpandableTextView
+
+@Serializable
+data object ProgressButton
