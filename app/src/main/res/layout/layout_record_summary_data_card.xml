@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:background="@drawable/bg_record_summary_data_card"
+    tools:paddingBottom="10dp"
+    tools:paddingHorizontal="12dp"
+    tools:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/text_h3"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2025/8" />
+
+    <!--  distance  -->
+    <TextView
+        android:id="@+id/tv_distance_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="总距离"
+        android:textColor="@color/text_h3"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@id/tv_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_label" />
+
+    <TextView
+        android:id="@+id/tv_distance_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_h1"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/tv_distance_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_distance_title"
+        tools:text="48" />
+
+    <TextView
+        android:id="@+id/tv_distance_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="km"
+        android:textColor="@color/text_h2"
+        android:textSize="13sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_distance_value"
+        app:layout_constraintStart_toEndOf="@id/tv_distance_value"
+        tools:text="km" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/distance_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tv_distance_title,tv_distance_value,tv_distance_unit" />
+
+    <TextView
+        android:id="@+id/tv_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="总时间"
+        android:textColor="@color/text_h3"
+        android:textSize="11sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_distance_title"
+        app:layout_constraintStart_toEndOf="@id/distance_barrier" />
+
+    <TextView
+        android:id="@+id/tv_time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_h1"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/tv_time_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_time_title"
+        tools:text="2:10:54" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/time_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tv_time_title,tv_time_value" />
+
+    <TextView
+        android:id="@+id/tv_climb_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="总爬升"
+        android:textColor="@color/text_h3"
+        android:textSize="11sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_time_title"
+        app:layout_constraintStart_toEndOf="@id/time_barrier" />
+
+    <TextView
+        android:id="@+id/tv_climb_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_h1"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/tv_climb_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_climb_title"
+        tools:text="314" />
+
+    <TextView
+        android:id="@+id/tv_climb_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="m"
+        android:textColor="@color/text_h2"
+        android:textSize="13sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_climb_value"
+        app:layout_constraintStart_toEndOf="@id/tv_climb_value"
+        tools:text="m" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/climb_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tv_climb_title,tv_climb_value,tv_climb_unit" />
+
+    <TextView
+        android:id="@+id/tv_times_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="次数"
+        android:textColor="@color/text_h3"
+        android:textSize="11sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_climb_title"
+        app:layout_constraintStart_toEndOf="@id/climb_barrier" />
+
+    <TextView
+        android:id="@+id/tv_times_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_h1"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/tv_times_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_times_title"
+        tools:text="2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

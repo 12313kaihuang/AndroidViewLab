@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_r_12"
+    android:orientation="vertical"
+    android:paddingTop="12dp"
+    android:paddingBottom="8dp"
+    tools:paddingHorizontal="12dp"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <com.yu.hu.viewlab.charts.analysis.RideRangeTabView
+        android:id="@+id/tab_view"
+        android:layout_width="match_parent"
+        android:layout_height="32dp" />
+
+    <include
+        android:id="@+id/tips_card"
+        layout="@layout/layout_record_summary_data_card"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp" />
+
+    <com.yu.hu.viewlab.charts.analysis.RideDataChartView
+        android:id="@+id/chart_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+</merge>
