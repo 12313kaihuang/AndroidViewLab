@@ -1,7 +1,9 @@
 package com.yu.hu.viewlab.charts.power
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
@@ -14,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.rememberLifecycleOwner
@@ -29,7 +32,10 @@ fun PowerDataScreen() {
     Scaffold { innerPadding ->
         val viewModel: PowerDataViewModel = viewModel()
         Column(
-            modifier = Modifier.padding(innerPadding),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF1C272D))
+                .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             var powerData by remember { mutableStateOf(PowerDistribution()) }
@@ -46,7 +52,7 @@ fun PowerDataScreen() {
 
             Text(text = "${powerData.startAngle} ${powerData.endAngle} size:${viewModel.dataBuffer.size}")
 
-            PowerDistributionChart(direction = "左", powerData, modifier = Modifier.size(200.dp))
+            PowerDistributionChart(powerData, modifier = Modifier.size(200.dp))
         }
     }
 }

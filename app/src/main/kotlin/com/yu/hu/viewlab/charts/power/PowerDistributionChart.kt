@@ -4,16 +4,17 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -27,17 +28,19 @@ import androidx.compose.ui.unit.sp
  */
 @Composable
 fun PowerDistributionChart(
-    direction: String?,
     powerData: PowerDistribution,
     modifier: Modifier = Modifier,
     style: PowerDistributionChartStyle = PowerDistributionChartDefaults.style()
 ) {
-    val strokeWidth = style.strokeWidth
+    val bgStyle = remember(style.bgColor) { TextStyle(color = style.bgColor, fontSize = 10.sp) }
+    val percentStyle =
+        remember(style.bgColor) { TextStyle(color = style.bgColor, fontSize = 14.sp) }
     val measurer = rememberTextMeasurer()
     Canvas(modifier = modifier) {
         val centerX = size.width / 2
         val centerY = size.height / 2
-        val peakStrokeWidth = strokeWidth + 10.dp.toPx()
+        val strokeWidth = style.strokeWidth.toPx()
+        val peakStrokeWidth = style.peakStrokeWidth.toPx()
         // 内切圆半径
         val outerRadius = size.minDimension / 2
         val innerRadius = outerRadius - peakStrokeWidth
@@ -66,7 +69,7 @@ fun PowerDistributionChart(
             startAngle = powerData.startAngle - 90f,
             sweepAngle = powerData.endAngle - powerData.startAngle,
             useCenter = false,
-            style = Stroke(width = strokeWidth, cap = StrokeCap.Round),
+            style = Stroke(width = strokeWidth),
             size = arcSize,
             topLeft = arcOffset
         )
@@ -105,8 +108,8 @@ fun PowerDistributionChart(
         }
 
         //起止角度文案
-        val startAngleResult = measurer.measure("TDC", style.textStyle)
-        val offsetY = centerY - innerRadius + 10.dp.toPx()
+        val startAngleResult = measurer.measure("TDC", bgStyle)
+        val offsetY = centerY - innerRadius + 12.dp.toPx()
         drawText(
             textLayoutResult = startAngleResult,
             topLeft = Offset(
@@ -114,7 +117,7 @@ fun PowerDistributionChart(
                 y = offsetY
             )
         )
-        val endAngleResult = measurer.measure("BDC", style.textStyle)
+        val endAngleResult = measurer.measure("BDC", bgStyle)
         drawText(
             textLayoutResult = endAngleResult,
             topLeft = Offset(
@@ -123,22 +126,30 @@ fun PowerDistributionChart(
             )
         )
 
-        // 方向文案
-        if (direction != null) {
-            val layoutResult = measurer.measure(direction, style.textStyle)
-            drawText(
-                textLayoutResult = layoutResult,
-                topLeft = Offset(
-                    x = centerX - layoutResult.size.width / 2,
-                    y = centerY - layoutResult.size.height / 2
-                )
+        // 百分比文案
+        val layoutResult = measurer.measure("46", style.textStyle)
+        drawText(
+            textLayoutResult = layoutResult,
+            topLeft = Offset(
+                x = centerX - layoutResult.size.width / 2,
+                y = centerY - layoutResult.size.height / 2
             )
-        }
+        )
+        val percentResult = measurer.measure("%", percentStyle)
+        drawText(
+            textLayoutResult = percentResult,
+            topLeft = Offset(
+                x = centerX + layoutResult.size.width / 2 + 2.dp.toPx(),
+                y = centerY - layoutResult.size.height / 2
+            )
+        )
+
     }
 }
 
 data class PowerDistributionChartStyle(
-    val strokeWidth: Float,
+    val strokeWidth: Dp,
+    val peakStrokeWidth: Dp,
     val bgColor: Color,
     val arcColor: Color,
     val peakArcColor: Color,
@@ -148,19 +159,21 @@ data class PowerDistributionChartStyle(
 object PowerDistributionChartDefaults {
 
     fun style(
-        strokeWidth: Float = 40f,
-        bgColor: Color = Color.Gray,
-        arcColor: Color = Color.Green,
-        peakArcColor: Color = Color.Black,
+        strokeWidth: Dp = 10.dp,
+        peakStrokeWidth: Dp = 14.dp,
+        bgColor: Color = Color(0x33FFFFFF),
+        arcColor: Color = Color(0xFF2FE6E9),
+//        peakArcColor: Color = Color(0xFF2FE6E9),
         textStyle: TextStyle = TextStyle(
-            color = Color.Black,
-            fontSize = 15.sp
+            color = Color.White,
+            fontSize = 24.sp
         )
     ) = PowerDistributionChartStyle(
         strokeWidth = strokeWidth,
+        peakStrokeWidth = peakStrokeWidth,
         bgColor = bgColor,
-        arcColor = arcColor,
-        peakArcColor = peakArcColor,
+        arcColor = arcColor.copy(alpha = 0.5f),
+        peakArcColor = arcColor,
         textStyle = textStyle
     )
 }
@@ -169,10 +182,9 @@ object PowerDistributionChartDefaults {
 @Composable
 private fun PowerDistributionChartPreview() {
     PowerDistributionChart(
-        direction = "左",
         powerData = PowerDistribution(20f, 165f, 45f, 98f),
         modifier = Modifier
-            .background(Color.White)
+            .background(Color.Black)
             .size(200.dp)
     )
 }
