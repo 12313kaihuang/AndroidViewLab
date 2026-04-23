@@ -19,7 +19,7 @@ class PowerDataViewModel : ViewModel() {
             val random = Random(System.currentTimeMillis())
             while (true) {
                 delay(20)
-                dataBuffer.add(
+                dataBuffer.add( //6.5 + 1.5 = 8   /16
                     PowerDistribution(
                         startAngle = random.nextInt(50).toFloat(),
                         endAngle = random.nextInt(120, 180).toFloat(),
