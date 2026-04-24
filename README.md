@@ -3,7 +3,7 @@
 
 
 
-* 骑行数据卡片 - [RecordAnalysisCard](./docs/ 骑行数据卡片.md)
+* 骑行数据卡片 - RecordAnalysisCard
 
   ![](.\docs\img\骑行数据卡片效果图.png)
 
